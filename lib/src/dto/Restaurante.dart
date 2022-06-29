@@ -6,12 +6,9 @@ class Restaurante {
   String description;
   String address;
   String zone;
-  String image;
   String location;
-  String buses;
   String telephone;
   String web;
-  String tags;
   String facebook;
   String twitter;
   String instagram;
@@ -23,12 +20,9 @@ class Restaurante {
     required this.description,
     required this.address,
     required this.zone,
-    required this.image,
     required this.location,
-    required this.buses,
     required this.telephone,
     required this.web,
-    required this.tags,
     required this.facebook,
     required this.twitter,
     required this.instagram,
@@ -46,12 +40,9 @@ class Restaurante {
           description: element["Texto"],
           address: element["Direccion"],
           zone: element["Zona"],
-          image: element["imagen"],
           location: element["Coordenadas" "Localidad"],
-          buses: element["lineas_bus"],
           telephone: element["Telefono"],
           web: element["Web"],
-          tags: element["etiquetas"],
           facebook: element["Facebook"],
           twitter: element["Twitter"],
           instagram: element["Instagram"],));
