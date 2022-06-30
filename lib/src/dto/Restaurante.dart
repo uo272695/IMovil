@@ -12,6 +12,7 @@ class Restaurante {
   String facebook;
   String twitter;
   String instagram;
+  String categories;
 
   // Constructor
   Restaurante({
@@ -26,6 +27,7 @@ class Restaurante {
     required this.facebook,
     required this.twitter,
     required this.instagram,
+    required this.categories
   });
 
   // Convertir la lista de datos dinamicos obtenida del JSON en una lista parseada de objetos Restaurante
@@ -45,7 +47,8 @@ class Restaurante {
           web: element["Web"],
           facebook: element["Facebook"],
           twitter: element["Twitter"],
-          instagram: element["Instagram"],));
+          instagram: element["Instagram"],
+          categories: element["Categories"]));
       }
     }
     return List.from(restaurants);
