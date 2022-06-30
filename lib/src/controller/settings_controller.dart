@@ -6,31 +6,31 @@ import '../service/settings_service.dart';
 // Se monitoriza el tema elegido por el propio usuario
 class SettingsController with ChangeNotifier {
 
-  // Constructor cuyo parametro es una instancia del servicio
-  SettingsController(this._settingsService);
+  // Constructor
+  SettingsController(this.settingsService);
 
-  // Instancia de la clase del servicio de las prefernecias del usuario
-  final SettingsService _settingsService;
+  // Instancia de la clase del servicio de las preferencias
+  final SettingsService settingsService;
 
   // Atributo para monitorizar el tema preferido del usuario
-  late ThemeMode _themeMode;
+  late ThemeMode themeMode2;
 
   // Inicializacion del atributo que monitoriza el tema preferido del usuario
-  ThemeMode get themeMode => _themeMode;
+  ThemeMode get themeMode => themeMode2;
 
 
   // Actualizacion y persistencia del tema preferido
   Future<void> updateThemeMode(ThemeMode? newThemeMode) async {
     if (newThemeMode == null) return;
-    if (newThemeMode == _themeMode) return;
-    _themeMode = newThemeMode;
+    if (newThemeMode == themeMode2) return;
+    themeMode2 = newThemeMode;
     notifyListeners();
-    await _settingsService.updateThemeMode(newThemeMode);
+    await settingsService.updateThemeMode(newThemeMode);
   }
 
   // Se cargan los ajustes a través del servicio correspondiente
   Future<void> loadSettings() async {
-    _themeMode = await _settingsService.themeMode();
+    themeMode2 = await settingsService.themeMode();
     notifyListeners();
   }
 

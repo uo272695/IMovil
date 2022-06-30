@@ -32,7 +32,7 @@ class Restaurante {
   static List<Restaurante> parseRestaurants(List<dynamic> data) {
     Set<Restaurante> restaurants = {};
     for (var element in data) {
-      // Evitar duplicados
+      // Evitar sitios duplicados
       if(!restaurants.map((e) => e.name).contains(element["titulo"])){
         restaurants.add(Restaurante(
           name: element["Nombre"].toString().replaceAll("&quot;", "\""),
