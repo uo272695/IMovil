@@ -69,7 +69,7 @@ class _RestaurantsState extends State<RestaurantListView> {
           for (var filter in selectedFiltersList) {
             if (
             (restaurant.zone.toLowerCase() == filter.toLowerCase()
-                || restaurant..toLowerCase().contains(filter.toLowerCase()))
+                || restaurant.categories.toLowerCase().contains(filter.toLowerCase()))
                 &&
                 !list.map((restaurant) => restaurant.name).contains(restaurant.name)
             ) {
@@ -164,10 +164,6 @@ class _RestaurantsState extends State<RestaurantListView> {
                             maxWidth: 104,
                             maxHeight: 551,
                           ),
-                          child: CircleAvatar(
-                            // Mostrar un avatar circular de la imagen del restaurante
-                            foregroundImage: NetworkImage(item.image),
-                          ),
                         ),
                         title: Text(item.name),
                         subtitle: Text(item.address),
@@ -176,7 +172,7 @@ class _RestaurantsState extends State<RestaurantListView> {
                           // al constructor de dicha clase pasando el item como parametro
                           Navigator.of(context).push(
                               MaterialPageRoute(
-                                  builder: (context) => RestaurantDetailView(restaurant: item)
+                                  builder: (context) => RestaurantDetailView(restaurante: item)
                               )
                           );
                         }
@@ -221,22 +217,22 @@ class _RestaurantsState extends State<RestaurantListView> {
   void initState() {
     super.initState();
     // Inicializar el estado filtrando el target (si hubiera) entre todos los objetos Restaurant
-    list.addAll(RestaurantService.restaurants);
+    list.addAll(Service.sitios);
     searchRestaurant(target);
   }
 
   /// Carga de la cache
-  Future<List<Restaurant>> loadCache() async {
+  Future<List<Restaurante>> loadCache() async {
     // Inicializacion de la cache y retorno de la lista de objetos Restaurant
-    dataCache = await RestaurantService.getRestaurants();
-    return RestaurantService.getRestaurants();
+    dataCache = await Service.getRestaurants();
+    return Service.getRestaurants();
   }
 
   void searchRestaurant(String query) {
-    List<Restaurant> listBeforeSearch = [];
-    List<Restaurant> listAfterSearch = [];
+    List<Restaurante> listBeforeSearch = [];
+    List<Restaurante> listAfterSearch = [];
     // Filtrar todos los objetos Restaurant segun la query pasada como parametro
-    listBeforeSearch.addAll(RestaurantService.restaurants);
+    listBeforeSearch.addAll(Service.sitios);
     if (query.isNotEmpty) {
       for (var restaurant in listBeforeSearch) {
         // La query puede coincidir con el nombre o la direccion del restaurante

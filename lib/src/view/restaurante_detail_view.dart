@@ -97,8 +97,6 @@ class RestaurantDetailView extends StatelessWidget {
       return Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          // Muestra la imagen a la izquierda
-          Image.network(restaurante.image, width: MediaQuery.of(context).size.width / 2),
           // Muestra el detail Widget con la mitad del ancho a la derecha
           SingleChildScrollView(
             child: detailWidget(context, _markers, MediaQuery.of(context).size.width / 2),
@@ -230,10 +228,9 @@ class RestaurantDetailView extends StatelessWidget {
                 width: width - 36,
                 child: Html(
                   // Valor del campo Direccion
-                    data: restaurante.address + (restaurante.district.isNotEmpty
-                        ? ", Distrito " + restaurante.district + ", "
-                        : ", ")
-                        + restaurante.postalCode,
+                    data: restaurante.address + (restaurante.zone.isNotEmpty
+                        ? ", Distrito " + restaurante.zone + ", "
+                        : ", "),
                     style: {
                       "body": Style(
                           textAlign: TextAlign.justify,
@@ -254,22 +251,6 @@ class RestaurantDetailView extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                           textAlign: TextAlign.justify,
                           fontSize: FontSize.larger,
-                          margin: const EdgeInsets.all(9.0)
-                      )
-                    }
-                )
-            ),
-            SizedBox(
-                width: width - 36,
-                child: Html(
-                  // Valor del campo Horario
-                    data: restaurante.opHours.isNotEmpty
-                        ? restaurante.opHours
-                        : "No disponible",
-                    style: {
-                      "body": Style(
-                          textAlign: TextAlign.justify,
-                          fontSize: FontSize.large,
                           margin: const EdgeInsets.all(9.0)
                       )
                     }
@@ -298,7 +279,7 @@ class RestaurantDetailView extends StatelessWidget {
           width: width - 36,
           child: Html(
             // Valor del campo Etiquetas
-              data: restaurante.tags, style: {
+              data: restaurante.categories, style: {
             "body": Style(
                 textAlign: TextAlign.justify,
                 fontSize: FontSize.large,
@@ -401,38 +382,6 @@ class RestaurantDetailView extends StatelessWidget {
           )
         ],
       ),
-      if (restaurante.buses.isNotEmpty)
-      // Titulo de la seccion Cómo llegar
-        Text(AppLocalizations.of(context)!.directions,
-            style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold, height: 3)
-        ),
-      if (restaurante.buses.isNotEmpty)
-        SizedBox(
-            width: width - 36,
-            // Tabla para mostrar las lineas de bus
-            child: Table(
-                border: TableBorder.all(),
-                children: [
-                  if (restaurante.buses.isNotEmpty)
-                    buildRow([
-                      // Cabeceras de la tabla
-                      AppLocalizations.of(context)!.line,
-                      AppLocalizations.of(context)!.initStop,
-                      AppLocalizations.of(context)!.lastStop
-                    ], isHeader: true),
-                  if (restaurante.buses.isNotEmpty)
-                    for (var i in restaurante.buses.split(","))
-                      buildRow(
-                        // Construir una fila con los datos previamente parseados
-                        RestauranteService.getBusLine(
-                            restaurante.buses.split(",")[
-                            restaurante.buses.split(",").indexOf(i)
-                            ]
-                        ),
-                      )
-                ]
-            )
-        ),
       SizedBox(
         // Margen inferior
         height: 26,
