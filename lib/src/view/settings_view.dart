@@ -1,7 +1,8 @@
 
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import '../controller/settings_controller.dart';
 
 class SettingsView extends StatelessWidget {
 

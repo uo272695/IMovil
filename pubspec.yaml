@@ -16,6 +16,7 @@ dependencies:
   flutter_html: ^2.2.1
   flutter_localizations:
     sdk: flutter
+  intl: ^0.17.0
   http: ^0.13.4
   url_launcher: ^6.1.0
   get: any
@@ -28,7 +29,6 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
   flutter_lints: ^2.0.0
 
 flutter:

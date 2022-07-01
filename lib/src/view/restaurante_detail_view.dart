@@ -86,7 +86,7 @@ class RestaurantDetailView extends StatelessWidget {
           child: Column(
               children: [
                 // Muestra la imagen y el detail Widget con el ancho completo
-                Image.network(restaurante.image),
+                Image.network(""),
                 detailWidget(context, _markers, MediaQuery.of(context).size.width)
               ]
           )
