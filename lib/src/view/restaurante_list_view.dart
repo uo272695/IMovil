@@ -166,7 +166,7 @@ class _RestaurantsState extends State<RestaurantListView> {
                           ),
                         ),
                         title: Text(item.name),
-                        subtitle: Text(item.address),
+                        subtitle: Text(item.address.toString()),
                         onTap: () {
                           // Navegacion a la ventana de detalle de cada restaurante, llamando
                           // al constructor de dicha clase pasando el item como parametro
@@ -237,7 +237,7 @@ class _RestaurantsState extends State<RestaurantListView> {
       for (var restaurant in listBeforeSearch) {
         // La query puede coincidir con el nombre o la direccion del restaurante
         if (restaurant.name.toLowerCase().contains(query.toLowerCase()) ||
-            restaurant.address.toLowerCase().contains(query.toLowerCase())) {
+            restaurant.address.toString().toLowerCase().contains(query.toLowerCase())) {
           listAfterSearch.add(restaurant);
         }
       }

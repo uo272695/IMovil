@@ -164,7 +164,7 @@ class RestaurantDetailView extends StatelessWidget {
                   maximumSize: Size(width / 2 - 28, 45)),
               onPressed: () {
                 // Al pulsarlo, copia la direccion de correo en el campo del destinatario
-                launchUrl(context, 'mailto:' + restaurante.email);
+                launchUrl(context, 'mailto:' + restaurante.email.toString());
               },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -184,7 +184,7 @@ class RestaurantDetailView extends StatelessWidget {
                   maximumSize: Size(width / 2 - 28, 45)),
               onPressed: () {
                 // Al pulsarlo, redirige a la pagina web indicada por URL
-                launchUrl(context, restaurante.web);
+                launchUrl(context, restaurante.toString());
               },
               child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -228,7 +228,7 @@ class RestaurantDetailView extends StatelessWidget {
                 width: width - 36,
                 child: Html(
                   // Valor del campo Direccion
-                    data: restaurante.address + (restaurante.zone.isNotEmpty
+                    data: restaurante.address.toString() + (restaurante.zone.isNotEmpty
                         ? ", Distrito " + restaurante.zone + ", "
                         : ", "),
                     style: {
@@ -307,7 +307,7 @@ class RestaurantDetailView extends StatelessWidget {
                   maximumSize: Size(width / 3 - 18, 45)),
               onPressed: () {
                 // Al pulsarlo, redirige a la pagina de Facebook indicada por URL
-                launchUrl(context, restaurante.facebook);
+                launchUrl(context, restaurante.facebook.toString());
               },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -327,7 +327,7 @@ class RestaurantDetailView extends StatelessWidget {
                   maximumSize: Size(width / 3 - 18, 45)),
               onPressed: () {
                 // Al pulsarlo, redirige via Twitter o navegador a la pagina de Twitter indicada por URL
-                launchUrl(context, restaurante.twitter);
+                launchUrl(context, restaurante.twitter.toString());
               },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -344,7 +344,7 @@ class RestaurantDetailView extends StatelessWidget {
                   maximumSize: Size(width / 3 - 18, 45)),
               onPressed: () {
                 // Al pulsarlo, redirige via Instagram o navegador a la pagina de Instagram indicada por URL
-                launchUrl(context, restaurante.instagram);
+                launchUrl(context, restaurante.instagram.toString());
               },
               child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,

@@ -2,16 +2,16 @@ class Restaurante {
 
   // Atributos
   String name;
-  String email;
-  String description;
-  String address;
+  String? email;
+  String? description;
+  String? address;
   String zone;
   String location;
   String telephone;
-  String web;
-  String facebook;
-  String twitter;
-  String instagram;
+  String? web;
+  String? facebook;
+  String? twitter;
+  String? instagram;
   String categories;
 
   // Constructor
