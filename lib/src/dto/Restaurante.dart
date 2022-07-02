@@ -35,14 +35,14 @@ class Restaurante {
     Set<Restaurante> restaurants = {};
     for (var element in data) {
       // Evitar sitios duplicados
-      if(!restaurants.map((e) => e.name).contains(element["titulo"])){
+      if(!restaurants.map((e) => e.name).contains(element["Nombre"])){
         restaurants.add(Restaurante(
           name: element["Nombre"].toString().replaceAll("&quot;", "\""),
           email: element["Email"],
           description: element["Texto"],
           address: element["Direccion"],
           zone: element["Zona"],
-          location: element["Coordenadas" "Localidad"],
+          location: element["Coordenadas"],
           telephone: element["Telefono"],
           web: element["Web"],
           facebook: element["Facebook"],
