@@ -51,7 +51,7 @@
   "@tags": {
     "description": "Restaurant tags"
   },
-  "location": "Directions - Location",
+  "location": "Location",
   "@location": {
     "description": "Where is the restaurant located in the map"
   },

@@ -12,7 +12,7 @@
     "address": "Dirección",
     "schedule": "Horario",
     "tags": "Etiquetas",
-    "location": "Cómo llegar - Ubicación",
+    "location": "Ubicación",
     "filters": "Filtros",
     "socialMedia": "Redes sociales",
     "launchError": "La URL no está disponible"
