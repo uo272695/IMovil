@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:proyecto_movil/src/service/service.dart';
 import 'package:proyecto_movil/src/view/settings_view.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:proyecto_movil/src/dto/restaurante.dart';
@@ -44,8 +43,8 @@ class RestaurantDetailView extends StatelessWidget {
         markerId: MarkerId(restaurante.name),
         position: LatLng(
           // Obtener las coordenadas (Lat, Long) del objeto Restaurant
-            double.parse(restaurante.location.split(',')[1].split(':')[1]),
-            double.parse(restaurante.location.split(',')[0].split(':')[1])
+            double.parse(restaurante.location.split(',')[0]),
+            double.parse(restaurante.location.split(',')[1])
         ),
         infoWindow: InfoWindow(
           // La ventana informativa sera la direccion para que al hacer clic
@@ -86,7 +85,7 @@ class RestaurantDetailView extends StatelessWidget {
           child: Column(
               children: [
                 // Muestra la imagen y el detail Widget con el ancho completo
-                Image.network(""),
+                Image.network("https://d1csarkz8obe9u.cloudfront.net/posterpreviews/restaurant-logo-design-template-b281aeadaa832c28badd72c1f6c5caad_screen.jpg?ts=1595421543"),
                 detailWidget(context, _markers, MediaQuery.of(context).size.width)
               ]
           )
@@ -160,7 +159,7 @@ class RestaurantDetailView extends StatelessWidget {
             // Boton de enviar un email con acceso al correo en una Row de medio ancho
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                  minimumSize: Size(width /2 - 28, 45),
+                  minimumSize: Size(width / 2 - 28, 45),
                   maximumSize: Size(width / 2 - 28, 45)),
               onPressed: () {
                 // Al pulsarlo, copia la direccion de correo en el campo del destinatario
@@ -184,7 +183,7 @@ class RestaurantDetailView extends StatelessWidget {
                   maximumSize: Size(width / 2 - 28, 45)),
               onPressed: () {
                 // Al pulsarlo, redirige a la pagina web indicada por URL
-                launchUrl(context, restaurante.toString());
+                launchUrl(context, restaurante.web.toString());
               },
               child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -204,7 +203,7 @@ class RestaurantDetailView extends StatelessWidget {
               // Titulo de la seccion Acerca de
                 AppLocalizations.of(context)!.about,
                 style: const TextStyle(
-                    height: 2, fontSize: 24, fontWeight: FontWeight.bold)
+                    height: 2, fontSize: 20, fontWeight: FontWeight.bold)
             ),
             SizedBox(
                 height: 30,
@@ -229,28 +228,12 @@ class RestaurantDetailView extends StatelessWidget {
                 child: Html(
                   // Valor del campo Direccion
                     data: restaurante.address.toString() + (restaurante.zone.isNotEmpty
-                        ? ", Distrito " + restaurante.zone + ", "
+                        ? ", " + restaurante.zone + ", "
                         : ", "),
                     style: {
                       "body": Style(
                           textAlign: TextAlign.justify,
                           fontSize: FontSize.large,
-                          margin: const EdgeInsets.all(9.0)
-                      )
-                    }
-                )
-            ),
-            SizedBox(
-                height: 30,
-                width: width - 36,
-                child: Html(
-                  // Subtitulo del campo Horario
-                    data: AppLocalizations.of(context)!.schedule,
-                    style: {
-                      "body": Style(
-                          fontWeight: FontWeight.bold,
-                          textAlign: TextAlign.justify,
-                          fontSize: FontSize.larger,
                           margin: const EdgeInsets.all(9.0)
                       )
                     }
@@ -291,7 +274,7 @@ class RestaurantDetailView extends StatelessWidget {
       Text(
         // Titulo de la seccion Redes Sociales
           AppLocalizations.of(context)!.socialMedia,
-          style: const TextStyle(height: 2, fontSize: 24, fontWeight: FontWeight.bold)
+          style: const TextStyle(height: 2, fontSize: 20, fontWeight: FontWeight.bold)
       ),
       SizedBox(
         height: 65,
@@ -337,7 +320,7 @@ class RestaurantDetailView extends StatelessWidget {
                 ],
               ),
             ),
-            // Boton de acceder al Instagram del restaurante en una Row de un tercio de ancho
+            // Boton de acceder al Instagram del restaurante
             ElevatedButton(
               style: ElevatedButton.styleFrom(
                   minimumSize: Size(width / 3 - 18, 45),
@@ -360,7 +343,7 @@ class RestaurantDetailView extends StatelessWidget {
       Text(
         // Titulo de la seccion Ubicacion
           AppLocalizations.of(context)!.location,
-          style: const TextStyle(height: 2, fontSize: 24, fontWeight: FontWeight.bold)
+          style: const TextStyle(height: 2, fontSize: 20, fontWeight: FontWeight.bold)
       ),
       Column(
         children: <Widget>[
@@ -371,9 +354,9 @@ class RestaurantDetailView extends StatelessWidget {
               child: GoogleMap(
                 initialCameraPosition: CameraPosition(
                   target: LatLng(
-                    // Establecer la posicion inicial de la camara en las coordenadas del restaurante
-                      double.parse(restaurante.location.split(',')[1].split(':')[1]),
-                      double.parse(restaurante.location.split(',')[0].split(':')[1])),
+                    // Establecer la posicion inicial en las coordenadas del restaurante
+                      double.parse(restaurante.location.split(',')[0]),
+                      double.parse(restaurante.location.split(',')[1])),
                   zoom: 15,
                 ),
                 // Añadir el marcador en las coordenadas del restaurante
@@ -381,34 +364,8 @@ class RestaurantDetailView extends StatelessWidget {
               )
           )
         ],
-      ),
-      SizedBox(
-        // Margen inferior
-        height: 26,
-        width: width - 36,
       )
     ]
     );
   }
-
-  TableRow buildRow(List<String> cells, {bool isHeader = false}) =>
-      TableRow(
-          children: cells.map(
-                  (cell) {
-                return Padding(
-                    padding: const EdgeInsets.all(12),
-                    child: Center(
-                      // Inicializar cada celda con los datos de los autobuses
-                        child: Text(
-                            cell,
-                            style: TextStyle(
-                                fontWeight: isHeader ? FontWeight.bold : FontWeight.normal
-                            )
-                        )
-                    )
-                );
-              }
-          ).toList()
-      );
-
 }

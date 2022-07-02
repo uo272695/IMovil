@@ -4,10 +4,8 @@ import 'package:proyecto_movil/src/dto/restaurante.dart';
 import 'package:proyecto_movil/src/service/service.dart';
 import 'package:proyecto_movil/src/view/restaurante_detail_view.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
-import '../view/settings_view.dart';
-
-/// Interfaz de la ventana que muestra la lista de restaurantes
+import 'package:proyecto_movil/src/view/settings_view.dart';
+// Interfaz de la ventana que muestra la lista de restaurantes
 class RestaurantListView extends StatefulWidget {
 
   // Constructor por defecto
@@ -26,6 +24,9 @@ class RestaurantListView extends StatefulWidget {
 /// Clase que define el estado del Widget
 class _RestaurantsState extends State<RestaurantListView> {
 
+  //Valor recorrer fotos
+  int cont=0;
+
   // Lista global de objetos Restaurant (varia segun filtros)
   List<Restaurante> list = [];
 
@@ -42,7 +43,7 @@ class _RestaurantsState extends State<RestaurantListView> {
     List<String> selectedFiltersList = Restaurante.getZones();
 
 
-  /// Abre el cuadro de dialogo con las etiquetas para filtrar
+  // Abre el cuadro de dialogo con las etiquetas para filtrar
   void openFilterDialog(context) async {
     await FilterListDialog.display<String>(
       context,
@@ -164,6 +165,10 @@ class _RestaurantsState extends State<RestaurantListView> {
                             maxWidth: 104,
                             maxHeight: 551,
                           ),
+                          child: const CircleAvatar(
+                            // Mostrar un avatar circular de la imagen del restaurante
+                            foregroundImage: NetworkImage("https://d1csarkz8obe9u.cloudfront.net/posterpreviews/restaurant-logo-design-template-b281aeadaa832c28badd72c1f6c5caad_screen.jpg?ts=1595421543"),
+                          ),
                         ),
                         title: Text(item.name),
                         subtitle: Text(item.address.toString()),
@@ -182,9 +187,11 @@ class _RestaurantsState extends State<RestaurantListView> {
               }
               else if (snapshot.hasError) {
                 // En caso de error
+                cont=cont+1;
                 return Text(snapshot.error.toString());
               }
               else {
+                cont=cont+1;
                 return Center(
                     child: Column(
                         mainAxisSize: MainAxisSize.max,
@@ -221,7 +228,7 @@ class _RestaurantsState extends State<RestaurantListView> {
     searchRestaurant(target);
   }
 
-  /// Carga de la cache
+  // Carga de la cache
   Future<List<Restaurante>> loadCache() async {
     // Inicializacion de la cache y retorno de la lista de objetos Restaurant
     dataCache = await Service.getRestaurants();
