@@ -112,7 +112,7 @@ class RestaurantDetailView extends StatelessWidget {
         width: width - 36,
         // Renderizar el codigo HTML de la descripcion del objeto Restaurant
         child: Html(
-            data: restaurante.description,
+            data: restaurante.description.toString(),
             style: {
               "body": Style(
                   textAlign: TextAlign.justify,
